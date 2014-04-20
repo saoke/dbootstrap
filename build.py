@@ -42,6 +42,7 @@ def main(arguments=None):
     target = namespace.target
     project_path = os.path.abspath(os.path.dirname(__file__))
     source_path = os.path.join(project_path, 'source')
+    estate_path = os.path.join(project_path, '../../../module/Estate/public/backend')
     build_path = os.path.join(project_path, 'build', target)
 
     log.info('Building {0} to {1}'.format(target, build_path))
@@ -127,6 +128,19 @@ def main(arguments=None):
             file.write(contents)
 
     elif target == 'theme':
+        result = execute([
+            'stylus', '--include', nib_lib_path,
+            os.path.join(estate_path, 'theme', 'backend.styl')
+        ])
+        if not result:
+            issues += 1
+
+        temporary_files.add(
+            os.path.join(estate_path, 'theme', 'backend.css')
+        )
+
+        loader_path = os.path.join(estate_path, 'entry_point.js')
+        
         log.info('Building Javascript packages.')
         profile_path = os.path.join(
             project_path, 'resource', 'dbootstrap_profile.js'
@@ -135,6 +149,7 @@ def main(arguments=None):
         result = execute([
             'node', unix_style(os.path.join(source_path, 'dojo', 'dojo.js')),
             'load=build',
+            '--require', unix_style(loader_path),
             '--profile', unix_style(profile_path),
             '--releaseDir', unix_style(build_path)
         ])

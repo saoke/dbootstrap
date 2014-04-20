@@ -37,6 +37,14 @@ var profile = {
                 'xstyle/load-css'
             ],
         },
+        'backend/main': {
+            include: [
+                'backend/main',
+                'backend/entry_point',
+                'backend/Backend',
+                'xstyle/load-css'
+            ]
+        }
     },
 
     staticHasFeatures: {
