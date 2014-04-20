@@ -14,13 +14,23 @@ var profile = {
     selectorEngine: 'acme',
 
     packages: [
+        'dojox',
         'dojo',
         'dijit',
         'xstyle',
         'dbootstrap',
     ],
-
     layers: {
+        'dojo/dojo': {
+            include: [
+                'dojo/dojo',
+                'dojo/i18n',
+                'dojo/domReady',
+                'dojo/selector/lite'
+            ],
+            boot: true,
+            customBase: true
+        },
         'dbootstrap/main': {
             include: [
                 'dbootstrap/main',
