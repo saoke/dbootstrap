@@ -69,7 +69,7 @@ var profile = {
 	   		[ "dijit", "../dijit" ],
 	   		[ "dojox", "../dojox" ],
 	   		[ "dojo", "../dojo" ],
-	   		[ "backend", "../../../../module/Estate/public/backend" ]
+	   		[ "backend", "../../../../../module/Estate/public/backend" ]
 	   	],
     staticHasFeatures: {
         'dojo-trace-api': 0,
