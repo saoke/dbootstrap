@@ -42,7 +42,6 @@ def main(arguments=None):
     target = namespace.target
     project_path = os.path.abspath(os.path.dirname(__file__))
     source_path = os.path.join(project_path, 'source')
-    estate_path = os.path.join(project_path, '..', '..', '..', 'module', 'Estate', 'public', 'backend')
     build_path = os.path.join(project_path, 'build', target)
 
     log.info('Building {0} to {1}'.format(target, build_path))
@@ -130,17 +129,16 @@ def main(arguments=None):
     elif target == 'theme':
         result = execute([
             'stylus', '--include', nib_lib_path,
-            os.path.join(estate_path, 'theme', 'backend.styl')
+            os.path.join(source_path, 'backend', 'theme', 'backend.styl')
         ])
         if not result:
             issues += 1
 
         temporary_files.add(
-            os.path.join(estate_path, 'theme', 'backend.css')
+            os.path.join(source_path, 'backend', 'theme', 'backend.css')
         )
 
-        loader_path = os.path.join(estate_path, 'entry_point.js')
-        
+        loader_path = os.path.join(source_path, 'backend', 'entry_point.js')
         log.info('Building Javascript packages.')
         profile_path = os.path.join(
             project_path, 'resource', 'dbootstrap_profile.js'
