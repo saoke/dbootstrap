@@ -42,7 +42,7 @@ def main(arguments=None):
     target = namespace.target
     project_path = os.path.abspath(os.path.dirname(__file__))
     source_path = os.path.join(project_path, 'source')
-    estate_path = os.path.join(project_path, '../../../module/Estate/public/backend')
+    estate_path = os.path.join(project_path, '..', '..', '..', 'module', 'Estate', 'public', 'backend')
     build_path = os.path.join(project_path, 'build', target)
 
     log.info('Building {0} to {1}'.format(target, build_path))
