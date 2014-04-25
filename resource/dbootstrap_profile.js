@@ -7,16 +7,15 @@ var profile = {
     basePath: '../source/',
     action: 'release',
     cssOptimize: 'comments',
-//    mini: true,
+    mini: true,
     optimize: 'shrinksafe',
     layerOptimize: 'shrinksafe',
     stripConsole: 'all',
     selectorEngine: 'acme',
-
     layers: {
-
         'dojo/dojo': {
             include: [
+                'dijit/dijit',
                 'dojo/dojo',
                 'dojo/i18n',
                 'dojo/domReady',
