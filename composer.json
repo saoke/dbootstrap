@@ -1,0 +1,23 @@
+{
+    "name": "saoke/dbootstrap",
+    "description": "dojo with zf2 builder",
+    "type": "library",
+    "keywords": [
+        "zf2"
+    ],
+    "homepage": "http://github.com/saoke/dbootstrap",
+    "authors": [
+    ],
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendframework": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "dbootstrap": "src/"
+        },
+        "classmap": [
+            "./"
+        ]
+    }
+}
