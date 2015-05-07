@@ -127,18 +127,19 @@ def main(arguments=None):
             file.write(contents)
 
     elif target == 'theme':
+    	source_code_path = os.path.abspath(project_path + '/../../../public')
         result = execute([
             'stylus', '--include', nib_lib_path,
-            os.path.join(source_path, 'backend', 'theme', 'backend.styl')
+            os.path.join(source_code_path, 'backend', 'theme', 'backend.styl')
         ])
         if not result:
             issues += 1
 
         temporary_files.add(
-            os.path.join(source_path, 'backend', 'theme', 'backend.css')
+            os.path.join(source_code_path, 'backend', 'theme', 'backend.css')
         )
 
-        loader_path = os.path.join(source_path, 'backend', 'entry_point.js')
+        loader_path = os.path.join(source_code_path, 'backend', 'entry_point.js')
         log.info('Building Javascript packages.')
         profile_path = os.path.join(
             project_path, 'resource', 'dbootstrap_profile.js'
