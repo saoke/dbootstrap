@@ -22,7 +22,7 @@ def main(arguments=None):
 
     # Parse arguments
     parser = argparse.ArgumentParser(description='Dbootstrap build.')
-    parser.add_argument('target', choices=['theme', 'demo'],
+    parser.add_argument('target', choices=['dist', 'demo'],
                         help='Target to build.')
     parser.add_argument('--no-prune', action='store_true',
                         help='If set, prevent removal of unnecessary files.')
@@ -126,7 +126,7 @@ def main(arguments=None):
             file.truncate()
             file.write(contents)
 
-    elif target == 'theme':
+    elif target == 'dist':
     	source_code_path = os.path.abspath(project_path + '/../../../public')
         result = execute([
             'stylus', '--include', nib_lib_path,
