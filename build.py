@@ -169,7 +169,7 @@ def main(arguments=None):
                 log.debug('Removing {0}'.format(package_path))
                 shutil.rmtree(package_path)
 
-        elif target == 'theme':
+        elif target == 'dist':
             for package in ('dojo', 'dijit', 'xstyle'):
                 package_path = os.path.join(build_path, package)
                 log.debug('Removing {0}'.format(package_path))
@@ -200,7 +200,7 @@ def main(arguments=None):
                 '*dgrid/css/dgrid.css'
             ]
 
-        elif target == 'theme':
+        elif target == 'dist':
             keepers = [
                 '*dbootstrap/main.js',
                 '*package.json',
