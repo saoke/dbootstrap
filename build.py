@@ -22,7 +22,7 @@ def main(arguments=None):
 
     # Parse arguments
     parser = argparse.ArgumentParser(description='Dbootstrap build.')
-    parser.add_argument('target', choices=['dist', 'demo'],
+    parser.add_argument('target', choices=['theme', 'demo'],
                         help='Target to build.')
     parser.add_argument('--no-prune', action='store_true',
                         help='If set, prevent removal of unnecessary files.')
@@ -126,20 +126,19 @@ def main(arguments=None):
             file.truncate()
             file.write(contents)
 
-    elif target == 'dist':
-    	source_code_path = os.path.abspath(project_path + '/../../../public')
+    elif target == 'theme':
         result = execute([
             'stylus', '--include', nib_lib_path,
-            os.path.join(source_code_path, 'backend', 'theme', 'backend.styl')
+            os.path.join(source_path, 'backend', 'theme', 'backend.styl')
         ])
         if not result:
             issues += 1
 
         temporary_files.add(
-            os.path.join(source_code_path, 'backend', 'theme', 'backend.css')
+            os.path.join(source_path, 'backend', 'theme', 'backend.css')
         )
 
-        loader_path = os.path.join(source_code_path, 'backend', 'entry_point.js')
+        loader_path = os.path.join(source_path, 'backend', 'entry_point.js')
         log.info('Building Javascript packages.')
         profile_path = os.path.join(
             project_path, 'resource', 'dbootstrap_profile.js'
@@ -169,7 +168,7 @@ def main(arguments=None):
                 log.debug('Removing {0}'.format(package_path))
                 shutil.rmtree(package_path)
 
-        elif target == 'dist':
+        elif target == 'theme':
             for package in ('dojo', 'dijit', 'xstyle'):
                 package_path = os.path.join(build_path, package)
                 log.debug('Removing {0}'.format(package_path))
@@ -200,7 +199,7 @@ def main(arguments=None):
                 '*dgrid/css/dgrid.css'
             ]
 
-        elif target == 'dist':
+        elif target == 'theme':
             keepers = [
                 '*dbootstrap/main.js',
                 '*package.json',

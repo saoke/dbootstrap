@@ -8,8 +8,8 @@ var profile = {
     action: 'release',
     cssOptimize: 'comments',
     mini: true,
-    optimize: 'shrinksafe',
-    layerOptimize: 'shrinksafe',
+    optimize: 'closure',
+    layerOptimize: 'closure',
     stripConsole: 'all',
     selectorEngine: 'acme',
     layers: {
