@@ -30,7 +30,7 @@ echo -n "Cleaning old files..."
 rm -rf "$DISTDIR"
 echo " Done"
 
-stylus -c "$SRCDIR/app/resources/app.styl"
+# stylus -c "$SRCDIR/app/resources/app.styl"
 "$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" $@
 
 cd "$BASEDIR"
