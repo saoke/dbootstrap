@@ -19,4 +19,5 @@ define([ "dojo/parser", "dijit/layout/BorderContainer",
 		"dojox/editor/plugins/Smiley",
 		"dojox/editor/plugins/UploadImage" ], function(parser) {
 	parser.parse();
+	demo.endLoading();
 });
