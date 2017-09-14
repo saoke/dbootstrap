@@ -19,7 +19,7 @@ define([ 'dojo/_base/declare', 'dijit/Dialog', "dojo/dom", "dojo/dom-style", "do
                     domStyle.set(node, 'display', 'none');
                 }
             }).play();
-        },
+        }
     });
     demo = new Demo();
     
