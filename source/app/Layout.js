@@ -1,7 +1,7 @@
 define([ "dojo/parser", "dijit/layout/BorderContainer",
 		"dijit/layout/ContentPane", "dojo/domReady!", "dijit/form/Button",
 		"dijit/layout/AccordionContainer", "dijit/form/TextBox",
-		"dijit/form/SimpleTextarea", "dijit/Editor", "dojo/parser",
+		"dijit/form/SimpleTextarea", "dijit/Editor",
 		"dojox/editor/plugins/PrettyPrint",
 		"dojox/editor/plugins/PageBreak",
 		"dojox/editor/plugins/ShowBlockNodes",
