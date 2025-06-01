@@ -22,6 +22,3 @@
 [submodule "source/nib"]
 	path = source/nib
 	url = https://github.com/visionmedia/nib.git
-[submodule "source/unify"]
-	path = source/unify
-	url = git@bitbucket.org:defyasdf/unify.git
