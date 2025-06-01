@@ -93,6 +93,8 @@ var profile = {
 	// <http://dojotoolkit.org/reference-guide/dojo/has.html>.
 	staticHasFeatures: {
 	    "config-deferredInstrumentation": 0,
+	    "isDebug": 0,
+	    "dojo-trace": 0,
 	    "config-dojo-loader-catches": 0,
 	    "config-tlmSiblingOfDojo": 0,
 	    "dojo-amd-factory-scan": 0,

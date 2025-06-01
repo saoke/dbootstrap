@@ -12,7 +12,7 @@ SRCDIR="$BASEDIR/source"
 TOOLSDIR="$SRCDIR/util/buildscripts"
 
 # Destination directory for built code
-DISTDIR="$BASEDIR/build/dist"
+DISTDIR="$BASEDIR/../../../public/dist"
 
 # Main application package build configuration
 PROFILE="$BASEDIR/resource/app.profile.js"
@@ -31,7 +31,7 @@ rm -rf "$DISTDIR"
 echo " Done"
 
 stylus -c "$SRCDIR/app/resources/app.styl"
-"$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" $@
+"$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" --useSourceMaps "false" $@
 
 cd "$BASEDIR"
 
