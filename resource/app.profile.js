@@ -34,18 +34,49 @@ var profile = {
 	// Uses Closure Compiler as the JavaScript minifier. This can also be set to "shrinksafe" to use ShrinkSafe,
 	// though ShrinkSafe is deprecated and not recommended.
 	// This option defaults to "" (no compression) if not provided.
-	optimize: 'closure',
+	optimize: 'shrinksafe',
 
 	// We're building layers, so we need to set the minifier to use for those, too.
 	// This defaults to "shrinksafe" if not provided.
-	layerOptimize: 'closure',
+	layerOptimize: 'shrinksafe',
 
 	// A list of packages that will be built. The same packages defined in the loader should be defined here in the
 	// build profile.
 	packages: [
-		// Using a string as a package is shorthand for `{ name: 'app', location: 'app' }`
-		'app',
-		'dgrid',
+		{
+			name: 'app',
+			location: 'app'
+		},
+		{
+			name: 'dgrid',
+			location: 'dgrid',
+			main: 'Grid',
+			trees: [
+				[ '.', '.', /(?:\/\.)|(?:~$)|(?:(?:html-report|node_modules|nib|nodes)\/)/ ]
+			],
+			resourceTags: {
+				copyOnly: function (filename, mid) {
+					return /\.(css|styl)$/.test(filename) || 
+						/\/demos\//.test(filename) || 
+						/\/test\//.test(filename) ||
+						mid === 'dgrid/Gruntfile' ||
+						mid === 'dgrid/package';
+				},
+				amd: function (filename) {
+					return /\.js$/.test(filename);
+				},
+				miniExclude: function (filename, mid) {
+					return /\/demos\//.test(filename) ||
+						/\.styl$/.test(filename) ||
+						/\/test\//.test(filename) ||
+						mid === 'dgrid/CHANGES.md' ||
+						mid === 'dgrid/LICENSE' ||
+						mid === 'dgrid/README.md' ||
+						mid === 'dgrid/Gruntfile' ||
+						mid === 'dgrid/package';
+				}
+			}
+		},
 		'dijit',
 		'dojo',
 		'dojox',
@@ -75,7 +106,19 @@ var profile = {
 			// a bunch of stuff we do not want or need. We want the initial script load to be as small and quick to
 			// load as possible, so we configure it as a custom, bootable base.
 			boot: true,
-			customBase: true
+			customBase: true,
+			include: [
+				'dojo/dom',
+				'dojo/domReady',
+				'dojo/query',
+				'dojo/on',
+				'dojo/dom-construct',
+				'dojo/dom-style',
+				'dojo/dom-class',
+				'dojo/dom-attr',
+				'dojo/dom-geometry',
+				'dojo/dom-form'
+			]
 		},
 
 		// In this demo application, we load `app/main` on the client-side, so here we build a separate layer containing
@@ -83,7 +126,57 @@ var profile = {
 		// but this helps provide a basic illustration of how multi-layer builds work.) Note that when you create a new
 		// layer, the module referenced by the layer is always included in the layer (in this case, `app/main`), so it
 		// does not need to be explicitly defined in the `include` array.
-		'app/main': {}
+		'app/main': {
+			include: [
+				'app/main'
+			]
+		},
+
+		// Add dgrid layer
+		'dgrid/Grid': {
+			include: [
+				'dgrid/Grid',
+				'dgrid/Selection',
+				'dgrid/Keyboard',
+				'dgrid/extensions/ColumnHider',
+				'dgrid/extensions/ColumnResizer',
+				'dgrid/extensions/ColumnReorder',
+				'dgrid/extensions/ColumnSet',
+				'dgrid/extensions/DnD',
+				'dgrid/extensions/Pagination',
+				'dgrid/extensions/CompoundColumns',
+				'dgrid/extensions/Tree'
+			],
+			exclude: [
+				'dojo/dojo',
+				'app/main'
+			],
+			deps: [
+				'dojo/dom',
+				'dojo/domReady',
+				'dojo/query',
+				'dojo/on',
+				'dojo/dom-construct',
+				'dojo/dom-style',
+				'dojo/dom-class',
+				'dojo/dom-attr',
+				'dojo/dom-geometry',
+				'dojo/dom-form'
+			],
+			layerDeps: [
+				'dojo/dom',
+				'dojo/domReady',
+				'dojo/query',
+				'dojo/on',
+				'dojo/dom-construct',
+				'dojo/dom-style',
+				'dojo/dom-class',
+				'dojo/dom-attr',
+				'dojo/dom-geometry',
+				'dojo/dom-form'
+			],
+			layer: true
+		}
 	},
 
 	// Providing hints to the build system allows code to be conditionally removed on a more granular level than simple
@@ -92,36 +185,52 @@ var profile = {
 	// with dead code removal. A documented list of has-flags in use within the toolkit can be found at
 	// <http://dojotoolkit.org/reference-guide/dojo/has.html>.
 	staticHasFeatures: {
-	    "config-deferredInstrumentation": 0,
-	    "isDebug": 0,
-	    "dojo-trace": 0,
-	    "config-dojo-loader-catches": 0,
-	    "config-tlmSiblingOfDojo": 0,
-	    "dojo-amd-factory-scan": 0,
-	    "dojo-combo-api": 0,
-	    "dojo-config-api": 1,
-	    "dojo-config-require": 0,
-	    "dojo-debug-messages": 0,
-	    "dojo-dom-ready-api": 1,
-	    "dojo-firebug": 0,
-	    "dojo-guarantee-console": 1,
-	    "dojo-has-api": 1,
-	    "dojo-inject-api": 1,
-	    "dojo-loader": 1,
-	    "dojo-log-api": 0,
-	    "dojo-modulePaths": 0,
-	    "dojo-moduleUrl": 0,
-	    "dojo-publish-privates": 0,
-	    "dojo-requirejs-api": 0,
-	    "dojo-sniff": 1,
-	    "dojo-sync-loader": 0,
-	    "dojo-test-sniff": 0,
-	    "dojo-timeout-api": 0,
-	    "dojo-trace-api": 0,
-	    "dojo-undef-api": 0,
-	    "dojo-v1x-i18n-Api": 1,
-	    "dom": 1,
-	    "host-browser": 1,
-	    "extend-dojo": 1
+		"config-deferredInstrumentation": 0,
+		"isDebug": 0,
+		"dojo-trace": 0,
+		"config-dojo-loader-catches": 0,
+		"config-tlmSiblingOfDojo": 0,
+		"dojo-amd-factory-scan": 0,
+		"dojo-combo-api": 0,
+		"dojo-config-api": 1,
+		"dojo-config-require": 0,
+		"dojo-debug-messages": 0,
+		"dojo-dom-ready-api": 1,
+		"dojo-firebug": 0,
+		"dojo-guarantee-console": 1,
+		"dojo-has-api": 1,
+		"dojo-inject-api": 1,
+		"dojo-loader": 1,
+		"dojo-log-api": 0,
+		"dojo-modulePaths": 0,
+		"dojo-moduleUrl": 0,
+		"dojo-publish-privates": 0,
+		"dojo-requirejs-api": 0,
+		"dojo-sniff": 1,
+		"dojo-sync-loader": 0,
+		"dojo-test-sniff": 0,
+		"dojo-timeout-api": 0,
+		"dojo-trace-api": 0,
+		"dojo-undef-api": 0,
+		"dojo-v1x-i18n-Api": 1,
+		"dom": 1,
+		"host-browser": 1,
+		"extend-dojo": 1
+	},
+
+	// Copy CSS files
+	copyOnly: {
+		'dgrid/css/dgrid.css': 1,
+		'dgrid/css/skins/claro/dgrid.css': 1
+	},
+
+	// 添加资源标签配置
+	resourceTags: {
+		amd: function(filename, mid) {
+			return /\.js$/.test(filename);
+		},
+		copyOnly: function(filename, mid) {
+			return this.copyOnly[mid] || /\.(css|styl)$/.test(filename);
+		}
 	}
 };
