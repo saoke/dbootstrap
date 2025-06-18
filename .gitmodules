@@ -22,3 +22,6 @@
 [submodule "source/nib"]
 	path = source/nib
 	url = https://github.com/visionmedia/nib.git
+[submodule "source/dstore"]
+	path = source/dstore
+	url = https://github.com/dojo/dojo1-dstore.git
