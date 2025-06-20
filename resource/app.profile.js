@@ -45,10 +45,11 @@ var profile = {
 	packages: [
 		// Using a string as a package is shorthand for `{ name: 'app', location: 'app' }`
 		'app',
-		'dgrid',
 		'dijit',
 		'dojo',
 		'dojox',
+		'dgrid',
+		'dstore',
 		'put-selector',
 		'xstyle'
 	],
@@ -56,7 +57,7 @@ var profile = {
 	// Strips all calls to console functions within the code. You can also set this to "warn" to strip everything
 	// but console.error, and any other truthy value to strip everything but console.warn and console.error.
 	// This defaults to "normal" (strip all but warn and error) if not provided.
-	stripConsole: 'all',
+	stripConsole: 'warn',
 
 	// The default selector engine is not included by default in a dojo.js build in order to make mobile builds
 	// smaller. We add it back here to avoid that extra HTTP request. There is also an "acme" selector available; if
@@ -74,6 +75,7 @@ var profile = {
 			// By default, the build system will try to include `dojo/main` in the built `dojo/dojo` layer, which adds
 			// a bunch of stuff we do not want or need. We want the initial script load to be as small and quick to
 			// load as possible, so we configure it as a custom, bootable base.
+			include: ["dojo/main"],
 			boot: true,
 			customBase: true
 		},
@@ -83,7 +85,31 @@ var profile = {
 		// but this helps provide a basic illustration of how multi-layer builds work.) Note that when you create a new
 		// layer, the module referenced by the layer is always included in the layer (in this case, `app/main`), so it
 		// does not need to be explicitly defined in the `include` array.
-		'app/main': {}
+		'app/main': {},
+		"dgrid/dgrid": {
+			include: [
+				"dgrid/Grid",
+				"dgrid/Selection",
+				"dgrid/Keyboard",
+				"dgrid/List",
+				"dgrid/OnDemandGrid",
+				"dgrid/ColumnSet",
+				"dgrid/Editor",
+				"dgrid/Tree",
+				"dgrid/_StoreMixin"
+			],
+			exclude: ["dojo/dojo"]
+		},
+		"dstore/dstore": {
+			include: [
+				"dstore/Store",
+				"dstore/Memory",
+				"dstore/Request",
+				"dstore/SimpleQuery",
+				"dstore/QueryResults"
+			],
+			exclude: ["dojo/dojo"]
+		}
 	},
 
 	// Providing hints to the build system allows code to be conditionally removed on a more granular level than simple

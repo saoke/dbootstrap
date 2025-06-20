@@ -31,7 +31,26 @@ rm -rf "$DISTDIR"
 echo " Done"
 
 stylus -c "$SRCDIR/app/resources/app.styl"
-"$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" --useSourceMaps "false" $@
+"$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" optimize='' layerOptimize=''
+# "$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" --useSourceMaps false --copyTests false
+
+# 编译 dstore 层
+# DSTORE_PROFILE="$BASEDIR/resource/dstore.profile.js"
+# DSTORE_DISTDIR="$DISTDIR"
+
+# echo "Building dstore with $DSTORE_PROFILE to $DSTORE_DISTDIR."
+# "$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" --release \
+# --optimize closure --layerOptimize closure --useSourceMaps false --stripConsole warn \
+# --mini true --copyTests false
+
+# 编译 dgrid 层
+# DGRID_PROFILE="$BASEDIR/resource/dgrid.profile.js"
+# DGRID_DISTDIR="$DISTDIR"
+
+# echo "Building dgrid with $DGRID_PROFILE to $DGRID_DISTDIR."
+# "$TOOLSDIR/build.sh" --profile "$DGRID_PROFILE" --basePath "$SRCDIR" --releaseDir "$DGRID_DISTDIR" --release \
+# --optimize closure --layerOptimize closure --useSourceMaps false --stripConsole warn \
+# --mini true --copyTests false
 
 cd "$BASEDIR"
 
