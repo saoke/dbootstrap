@@ -35,22 +35,19 @@ stylus -c "$SRCDIR/app/resources/app.styl"
 # "$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" --useSourceMaps false --copyTests false
 
 # 编译 dstore 层
-# DSTORE_PROFILE="$BASEDIR/resource/dstore.profile.js"
-# DSTORE_DISTDIR="$DISTDIR"
+DSTORE_PROFILE="$BASEDIR/resource/dstore.profile.js"
+DSTORE_DISTDIR="$DISTDIR"
 
-# echo "Building dstore with $DSTORE_PROFILE to $DSTORE_DISTDIR."
-# "$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" --release \
-# --optimize closure --layerOptimize closure --useSourceMaps false --stripConsole warn \
-# --mini true --copyTests false
+echo "Building dstore with $DSTORE_PROFILE to $DSTORE_DISTDIR."
+"$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" --release optimize='' layerOptimize=''
+# "$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" \
+# --optimize closure --layerOptimize closure --useSourceMaps false --stripConsole warn --mini true --copyTests false
 
-# 编译 dgrid 层
-# DGRID_PROFILE="$BASEDIR/resource/dgrid.profile.js"
-# DGRID_DISTDIR="$DISTDIR"
+# 编译有问题， 先复制 dgrid 层
+DGRID_DISTDIR="$DISTDIR"
 
-# echo "Building dgrid with $DGRID_PROFILE to $DGRID_DISTDIR."
-# "$TOOLSDIR/build.sh" --profile "$DGRID_PROFILE" --basePath "$SRCDIR" --releaseDir "$DGRID_DISTDIR" --release \
-# --optimize closure --layerOptimize closure --useSourceMaps false --stripConsole warn \
-# --mini true --copyTests false
+echo "Coping dgrid with $DISTDIR to $DGRID_DISTDIR."
+cp -r "$SRCDIR/dgrid" "$DGRID_DISTDIR"
 
 cd "$BASEDIR"
 

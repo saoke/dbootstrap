@@ -86,20 +86,7 @@ var profile = {
 		// layer, the module referenced by the layer is always included in the layer (in this case, `app/main`), so it
 		// does not need to be explicitly defined in the `include` array.
 		'app/main': {},
-		"dgrid/dgrid": {
-			include: [
-				"dgrid/Grid",
-				"dgrid/Selection",
-				"dgrid/Keyboard",
-				"dgrid/List",
-				"dgrid/OnDemandGrid",
-				"dgrid/ColumnSet",
-				"dgrid/Editor",
-				"dgrid/Tree",
-				"dgrid/_StoreMixin"
-			],
-			exclude: ["dojo/dojo"]
-		},
+
 		"dstore/dstore": {
 			include: [
 				"dstore/Store",
