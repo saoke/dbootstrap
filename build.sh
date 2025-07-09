@@ -39,9 +39,9 @@ DSTORE_PROFILE="$BASEDIR/resource/dstore.profile.js"
 DSTORE_DISTDIR="$DISTDIR"
 
 echo "Building dstore with $DSTORE_PROFILE to $DSTORE_DISTDIR."
-"$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" --release optimize='' layerOptimize=''
-# "$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" \
-# --optimize closure --layerOptimize closure --useSourceMaps false --stripConsole warn --mini true --copyTests false
+# "$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" --release optimize='' layerOptimize=''
+"$TOOLSDIR/build.sh" --profile "$DSTORE_PROFILE" --basePath "$SRCDIR" --releaseDir "$DSTORE_DISTDIR" \
+--optimize closure --layerOptimize closure --useSourceMaps false --stripConsole warn --mini true --copyTests false
 
 # 编译有问题， 先复制 dgrid 层
 DGRID_DISTDIR="$DISTDIR"
